@@ -49,6 +49,9 @@ Under the /etc/rc.d/rc*.d/ directories, you would see programs that start with S
 There are numbers right next to S and K in the program names. Those are the sequence number in which the programs should be started or killed.
 
 
+Source - https://www.thegeekstuff.com/2011/02/linux-boot-process/
+
+
 
 
  
