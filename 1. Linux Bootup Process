@@ -1,6 +1,62 @@
-What happens behind the scenes from the time you press the power button until the Linux login prompt appears?
+----------------------What happens behind the scenes from the time you press the power button until the Linux login prompt appears?-----------------------
 
 6 high level stages of a typical Linux boot process.
+ 
+
+Basic Input/Output System -executes MBR
+Master Boot Record -executes GRUB
+Grand Unified Bootloader -executes Kernel
+Kernel -executes /sbin/init
+Init - executes runlevel programs
+Runlevel programs are -executed from /etc/rc.d/rc*.
+
+👉 Stage 1: BIOS (Basic Input/Output System)
+Imagine BIOS as the Sherlock Holmes of your computer, Sherlock BIOS! 🕵️‍♂️ It scours through your floppy disks, CD-ROMs, and hard drives, searching for clues (a.k.a. boot loaders). Once found, it loads them into memory. BIOS loads and executes MBR boot loader
+
+👉 Stage 2: MBR (Master Boot Record) - 
+Now, let's dive deeper into the mystery. The MBR, located in the !st sector of your bootable disk(/dev/hda or /dev/sda), takes control. It contains information about GRUB(or LILO in old systems). MBR loads and executes GRUB boot loader.
+
+👉 Stage 3: GRUB (Grand Unified Bootloader) 
+Meet GRUB, The menu . If the system has multiple kernel image in the system, then we can choose which one to be executed. It has knowledge of Filesystem. Grub configuration file is /boot/grub/grub.conf (/etc/grub.conf is a link to this). GRUB loads and executes Kernel and intrd images(Initial RAM Disk)
+
+👉 Stage 4: Kernel 
+The Kernel takes center stage, it mounts root file system specified in “root=” in grub.conf It launches /sbin/init ( init was the 1st program to be executed by Linux Kernel, it has the process id (PID) of 1. Do a ‘ps -ef | grep init’ and check the pid.) , Kernel is not alone it has a helper - intrd which the kernel uses as temporary root file system until kernel is booted and real file system is mounted.
+It also contains necessary drivers compiled inside, which helps it to access the hard drive partitions, and other hardware.
+
+👉 Stage 5: Init -
+Init, is the first user-space program to be executed by the Linux Kernel. It's the trailblazer, the one with the almighty Process ID (PID) of 1. It looks at the /etc/inittab file to decide the Linux run level.
+Following are the available run levels
+0 – halt
+1 – Single user mode
+2 – Multiuser, without NFS
+3 – Full multiuser mode
+4 – unused
+5 – X11
+6 – reboot
+Init identifies the default initlevel from /etc/inittab and uses that to load all appropriate program.
+
+👉 Stage 6: Runlevel programs
+When the Linux system is booting up, you might see various services getting started. For example, it might say “starting sendmail …. OK”. Those are the runlevel programs🌠
+Depending on your default init level setting, the system will execute the programs from one of the following directories.
+Run level 0 – /etc/rc.d/rc0.d/
+Run level 1 – /etc/rc.d/rc1.d/
+Run level 2 – /etc/rc.d/rc2.d/
+Run level 3 – /etc/rc.d/rc3.d/
+Run level 4 – /etc/rc.d/rc4.d/
+Run level 5 – /etc/rc.d/rc5.d/
+Run level 6 – /etc/rc.d/rc6.d/
+Under the /etc/rc.d/rc*.d/ directories, you would see programs that start with S(startup) and K(kill).
+There are numbers right next to S and K in the program names. Those are the sequence number in which the programs should be started or killed.
+
+
+
+
+ 
+
+ 
+
+ 
+
 
 
 
