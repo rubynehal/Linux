@@ -1,1 +1,35 @@
+ Kernel
+
+💭What is Kernel?
+
+👉Central component of OS     
+👉Manages operations of computer and H/w
+👉Acts as a bridge between Applications & data-processing performed at H/W level
+
+
+
+💭What are Different Types of Kernel present?
+
+👉Windows and Windows Phone uses NT Kernel
+👉OS10 and iOS uses Darwin kernel
+👉Android uses Linux Kernel
+
+
+
+💭Types of Kernels
+
+👉Monolithic Kernels - Linux is a monolithic Kernel.
+All the services, all drivers, all things handling memory all are present in one program that occupies one memory space.
+
+👉Microkernel - Kernel takes very small memory space & others- like device drivers, networking and file systems runs as user level programs & kernel interacts with them. 
+If one of those crashes, Kernel doesn't
+
+Source - https://www.youtube.com/watch?v=mycVSMyShk8&t=30s&ab_channel=AndroidAuthority
+
+
+
+
+
+
+
 
